@@ -4,10 +4,9 @@ from telegram import Update
 from telegram.ext import ApplicationBuilder, ConversationHandler, CommandHandler, ContextTypes, MessageHandler, filters
 import json
 import uuid
+from config import TOKEN, CHANNEL_ID
 
-# Replace your_bot_token with the actual bot token from BotFather
-TOKEN = "5526713521:AAEljrEWYhpZsx2x2NF-3yI-X4VuKNBkjws"
-
+ 
 # Enable logging
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
@@ -84,7 +83,7 @@ async def wallet(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     post = f"🔔 New Request 🔔\n\n👤 Name: {context.user_data['name']}\n📍 Location: {context.user_data['location']}\n📜 Title: {context.user_data['title']}\n💬 Description: {context.user_data['description']}\n💰 Money Needed: {context.user_data['money']}\n🔗 Wallet: {context.user_data['wallet']}"
 
     # Replace 'yourchannel' with the actual username of your channel
-    await context.bot.send_message(chat_id='@bigcryptoaids', text=post)
+    await context.bot.send_message(chat_id=CHANNEL_ID, text=post)
 
     # Save the request in the database or file-based storage
     save_request(context.user_data)
